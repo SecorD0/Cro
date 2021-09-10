@@ -18,9 +18,9 @@ sudo apt install jq git build-essential pkg-config libssl-dev -y
 . <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/golang_installer.sh)
 echo -e '\e[40m\e[92mNode installation...\e[0m'
 cd
-wget https://github.com/crypto-org-chain/chain-main/releases/download/v3.0.0-croeseid/chain-main_3.0.0-croeseid_Linux_x86_64.tar.gz
-sudo tar -zxvf chain-main_3.0.0-croeseid_Linux_x86_64.tar.gz
-sudo rm -rf chain-main_3.0.0-croeseid_Linux_x86_64.tar.gz CHANGELOG.md LICENSE readme.md
+wget https://github.com/crypto-org-chain/chain-main/releases/download/v3.1.0-croeseid/chain-main_3.1.0-croeseid_Linux_x86_64.tar.gz
+sudo tar -zxvf chain-main_3.1.0-croeseid_Linux_x86_64.tar.gz
+sudo rm -rf chain-main_3.1.0-croeseid_Linux_x86_64.tar.gz CHANGELOG.md LICENSE readme.md
 sudo cp $HOME/bin/chain-maind /usr/local/bin/
 chain-maind init $cro_moniker --chain-id testnet-croeseid-4
 wget -qO $HOME/.chain-maind/config/genesis.json https://raw.githubusercontent.com/crypto-com/testnets/main/testnet-croeseid-4/genesis.json
@@ -46,14 +46,12 @@ sudo tee /etc/systemd/system/chain-maind.service > /dev/null <<EOF
 [Unit]
 Description=Chain-maind
 After=network.target
-
 [Service]
 User=$USER
 ExecStart=$(which chain-maind) start
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
-
 [Install]
 WantedBy=multi-user.target
 EOF
