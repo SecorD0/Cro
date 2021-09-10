@@ -46,12 +46,14 @@ sudo tee /etc/systemd/system/chain-maind.service > /dev/null <<EOF
 [Unit]
 Description=Chain-maind
 After=network.target
+
 [Service]
 User=$USER
 ExecStart=$(which chain-maind) start
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
+
 [Install]
 WantedBy=multi-user.target
 EOF
