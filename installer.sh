@@ -17,10 +17,11 @@ echo -e "Your wallet name: \e[40m\e[92m$cro_wallet_name\e[0m\n"
 sudo apt install jq git build-essential pkg-config libssl-dev -y
 . <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/golang_installer.sh)
 echo -e '\e[40m\e[92mNode installation...\e[0m'
+cd
 wget https://github.com/crypto-org-chain/chain-main/releases/download/v3.0.0-croeseid/chain-main_3.0.0-croeseid_Linux_x86_64.tar.gz
 sudo tar -zxvf chain-main_3.0.0-croeseid_Linux_x86_64.tar.gz
 sudo rm -rf chain-main_3.0.0-croeseid_Linux_x86_64.tar.gz CHANGELOG.md LICENSE readme.md
-sudo cp /root/bin/chain-maind /usr/local/bin/
+sudo cp $HOME/bin/chain-maind /usr/local/bin/
 chain-maind init $cro_moniker --chain-id testnet-croeseid-4
 wget -qO $HOME/.chain-maind/config/genesis.json https://raw.githubusercontent.com/crypto-com/testnets/main/testnet-croeseid-4/genesis.json
 sed -i.bak -e 's%minimum-gas-prices = ""%minimum-gas-prices = "0.025basetcro"%; '\
