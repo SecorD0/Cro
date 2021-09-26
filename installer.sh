@@ -54,8 +54,6 @@ if [ ! -n "$cro_moniker" ]; then
 fi
 printf_n "Your node moniker: ${C_LGn}${cro_moniker}${RES}"
 . <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) -n cro_moniker -v "$cro_moniker"
-
-
 if [ ! -n "$cro_wallet_name" ]; then
 	printf "${C_LGn}Enter a wallet name:${RES} "
 	read cro_wallet_name
