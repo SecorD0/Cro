@@ -100,7 +100,7 @@ delegated=`echo "$(jq -r ".tokens" <<< $node_info)/1000000" | bc -l`
 voting_power=`jq -r ".ValidatorInfo.VotingPower" <<< $status`
 # Output
 if [ "$raw_output" = "true" ]; then
-	printf '{"moniker": "%s", "identity": "%s", "website": "%s", "details": "%s", "network": "%s", "version": "%s", "validator_pub_key": "%s", "validator_address": "%s", "jailed": %b, "latest_block_height": %d, "catching_up": %b, "delegated": %.3f, "voting_power": %d}\n' \
+	printf_n '{"moniker": "%s", "identity": "%s", "website": "%s", "details": "%s", "network": "%s", "version": "%s", "validator_pub_key": "%s", "validator_address": "%s", "jailed": %b, "latest_block_height": %d, "catching_up": %b, "delegated": %.3f, "voting_power": %d}' \
 "$moniker" \
 "$identity" \
 "$website" \
