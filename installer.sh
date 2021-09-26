@@ -2,27 +2,27 @@
 sudo apt install wget -y
 . <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/logo.sh)
 echo -e 'The guide of \e[40m\e[92mhttps://t.me/mzonder\e[0m was used: https://mzonder.notion.site/mzonder/CRO-Relayer-d84e481dbf484d59b5595075d36ba383\n'
-if [ ! $cro_moniker ]; then
+if [ ! -n "$cro_moniker" ]; then
 	echo -n -e '\e[40m\e[92mEnter a node moniker:\e[0m '
 	read -r cro_moniker
-	. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) "cro_moniker" $cro_moniker
+	. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) -n "cro_moniker" -v "$cro_moniker"
 fi
 echo -e "Your node name: \e[40m\e[92m$cro_moniker\e[0m\n"
-if [ ! $cro_wallet_name ]; then
+if [ ! -n "$cro_wallet_name" ]; then
 	echo -n -e '\e[40m\e[92mEnter a wallet name:\e[0m '
 	read -r cro_wallet_name
-	. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) "cro_wallet_name" $cro_wallet_name
+	. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) -n "cro_wallet_name" -v "$cro_wallet_name"
 fi
 echo -e "Your wallet name: \e[40m\e[92m$cro_wallet_name\e[0m\n"
 sudo apt install jq git build-essential pkg-config libssl-dev -y
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/golang_installer.sh)
+. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/golang_installer.sh) --
 echo -e '\e[40m\e[92mNode installation...\e[0m'
 cd
 wget https://github.com/crypto-org-chain/chain-main/releases/download/v3.1.0-croeseid/chain-main_3.1.0-croeseid_Linux_x86_64.tar.gz
 sudo tar -zxvf chain-main_3.1.0-croeseid_Linux_x86_64.tar.gz
 sudo rm -rf chain-main_3.1.0-croeseid_Linux_x86_64.tar.gz CHANGELOG.md LICENSE readme.md
 sudo cp $HOME/bin/chain-maind /usr/local/bin/
-chain-maind init $cro_moniker --chain-id testnet-croeseid-4
+chain-maind init "$cro_moniker" --chain-id testnet-croeseid-4
 wget -qO $HOME/.chain-maind/config/genesis.json https://raw.githubusercontent.com/crypto-com/testnets/main/testnet-croeseid-4/genesis.json
 sed -i.bak -e 's%minimum-gas-prices = ""%minimum-gas-prices = "0.025basetcro"%; '\
 's%^address = \"0.0.0.0:9090\"%address = \"0.0.0.0:9095\"%; '\
@@ -60,7 +60,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable chain-maind
 sudo systemctl restart chain-maind
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) "cro_log" "sudo journalctl -f -n 100 -u chain-maind" true
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) "cro_node_info" ". <(wget -qO- https://raw.githubusercontent.com/SecorD0/Cro/main/node_info.sh) 'RU' 2> /dev/null" true
+. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) -n "cro_log" -v "sudo journalctl -f -n 100 -u chain-maind" -a
+. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) -n "cro_node_info" -v ". <(wget -qO- https://raw.githubusercontent.com/SecorD0/Cro/main/node_info.sh) 'RU' 2> /dev/null" -a
 echo -e "\n"
-chain-maind keys add $cro_wallet_name --keyring-backend file
+chain-maind keys add "$cro_wallet_name" --keyring-backend file
