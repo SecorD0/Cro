@@ -14,13 +14,13 @@ while test $# -gt 0; do
 		echo
 		echo -e "Usage: script ${C_LGn}[OPTIONS]${RES}"
 		echo
-		echo -e "You can use ${C_LGn}either${RES} \"=\" or \" \" as an option and value delimiter"
-		echo
 		echo -e "${C_LGn}Options${RES}:"
 		echo -e "  -h, --help               show help page"
 		echo -e "  -l, --language LANGUAGE  use the LANGUAGE for texts"
 		echo -e "                           LANGUAGE is '${C_LGn}EN${RES}' (default), '${C_LGn}RU${RES}'"
 		echo -e "  -ro, --raw-output        the raw JSON output"
+		echo
+		echo -e "You can use either \"=\" or \" \" as an option and value ${C_LGn}delimiter${RES}"
 		echo
 		echo -e "${C_LGn}Useful URLs${RES}:"
 		echo -e "https://github.com/SecorD0/Cro/blob/main/node_info.sh - script URL (you can send Pull request with new texts to add a language)"
@@ -33,7 +33,7 @@ while test $# -gt 0; do
 		language=`option_value $1`
 		shift
 		;;
-	-ro*|--raw-output*)
+	-ro|--raw-output)
 		raw_output="true"
 		shift
 		;;
