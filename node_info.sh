@@ -96,7 +96,7 @@ validator_address=`jq -r ".operator_address" <<< $node_info`
 jailed=`jq -r ".jailed" <<< $node_info`
 latest_block_height=`jq -r ".SyncInfo.latest_block_height" <<< $status`
 catching_up=`jq -r ".SyncInfo.catching_up" <<< $status`
-delegated=`echo "$(jq -r ".tokens" <<< $node_info)/1000000" | bc -l`
+delegated=`bc -l <<< "$(jq -r ".tokens" <<< $node_info)/1000000"`
 voting_power=`jq -r ".ValidatorInfo.VotingPower" <<< $status`
 # Output
 if [ "$raw_output" = "true" ]; then
