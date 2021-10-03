@@ -53,15 +53,15 @@ if [ ! -n "$cro_moniker" ]; then
 	read cro_moniker
 fi
 printf_n "Your node moniker: ${C_LGn}${cro_moniker}${RES}"
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) -n cro_moniker -v "$cro_moniker"
+. <wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n cro_moniker -v "$cro_moniker"
 if [ ! -n "$cro_wallet_name" ]; then
 	printf "${C_LGn}Enter a wallet name:${RES} "
 	read cro_wallet_name
 fi
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) -n cro_wallet_name -v "$cro_wallet_name"
+. <wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n cro_wallet_name -v "$cro_wallet_name"
 printf_n "Your wallet name: ${C_LGn}${cro_wallet_name}${RES}"
 sudo apt install jq git build-essential pkg-config libssl-dev -y
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/golang_installer.sh) --
+. <wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/installers/golang.sh) --
 printf_n "${C_LGn}Node installation...${RES}"
 cd
 wget https://github.com/crypto-org-chain/chain-main/releases/download/v3.1.0-croeseid/chain-main_3.1.0-croeseid_Linux_x86_64.tar.gz
@@ -106,7 +106,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable chain-maind
 sudo systemctl restart chain-maind
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) -n cro_log -v "sudo journalctl -f -n 100 -u chain-maind" -a
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/insert_variable.sh) -n cro_node_info -v ". <(wget -qO- https://raw.githubusercontent.com/SecorD0/Cro/main/node_info.sh) -l RU 2> /dev/null" -a
+. <wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n cro_log -v "sudo journalctl -f -n 100 -u chain-maind" -a
+. <wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n cro_node_info -v ". <(wget -qO- https://raw.githubusercontent.com/SecorD0/Cro/main/node_info.sh) -l RU 2> /dev/null" -a
 printf_n
 chain-maind keys add "cro_wallet_name" --keyring-backend file
