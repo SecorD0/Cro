@@ -108,5 +108,6 @@ sudo systemctl enable chain-maind
 sudo systemctl restart chain-maind
 . <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n cro_log -v "sudo journalctl -f -n 100 -u chain-maind" -a
 . <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n cro_node_info -v ". <(wget -qO- https://raw.githubusercontent.com/SecorD0/Cro/main/node_info.sh) -l RU 2> /dev/null" -a
+chain-maind config keyring-backend file
 printf_n
 chain-maind keys add "$cro_wallet_name" --keyring-backend file
