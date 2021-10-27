@@ -120,7 +120,7 @@ validator_address=`jq -r ".operator_address" <<< $node_info`
 jailed=`jq -r ".jailed" <<< $node_info`
 latest_block_height=`jq -r ".SyncInfo.latest_block_height" <<< $status`
 catching_up=`jq -r ".SyncInfo.catching_up" <<< $status`
-delegated=`bc -l <<< "$(jq -r ".tokens" <<< $node_info)/1000000"`
+delegated=`bc -l <<< "$(jq -r ".tokens" <<< $node_info)/100000000"`
 voting_power=`jq -r ".ValidatorInfo.VotingPower" <<< $status`
 # Output
 if [ "$raw_output" = "true" ]; then
@@ -166,7 +166,7 @@ else
 	printf_n "$t_vp" "$voting_power"
 	if [ -n "$cro_wallet_address" ]; then
 		printf_n "$t_wa" "$cro_wallet_address"
-		balance=`bc -l <<< "$($daemon query bank balances "$cro_wallet_address" -o json --node "$node_tcp" | jq -r ".balances[0].amount")/1000000"`
+		balance=`bc -l <<< "$($daemon query bank balances "$cro_wallet_address" -o json --node "$node_tcp" | jq -r ".balances[0].amount")/100000000"`
 		printf_n "$t_bal" "$balance"
 	fi
 fi
