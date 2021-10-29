@@ -154,7 +154,7 @@ else
 	fi
 	printf_n "$t_lb" "$latest_block_height"
 	if [ "$catching_up" = "true" ]; then
-		current_block=`wget -qO- https://testnet-croeseid-4.crypto.org:26657/block | jq -r ".result.block.header.height"`
+		current_block=`wget -qO- "https://testnet-croeseid-4.crypto.org:26657/abci_info" | jq -r ".result.response.last_block_height"`
 		diff=`bc -l <<< "$current_block-$latest_block_height"`
 		takes_time=`bc -l <<< "$diff/4/60"`
 		printf_n "$t_sy1"
