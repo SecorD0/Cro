@@ -106,7 +106,7 @@ if [ -n "$cro_wallet_name" ] && [ ! -n "$cro_wallet_address" ]; then
 		printf_n "$t_ewa_err"
 	fi
 fi
-node_tcp=`cat "${node_dir}config/config.toml" | grep -oPm1 "(?<=^laddr = \")([^%]+)(?=\")"`
+node_tcp=`grep -oPm1 "(?<=^laddr = \")([^%]+)(?=\")" "${node_dir}config/config.toml"`
 status=`$daemon status --node "$node_tcp" 2>&1`
 moniker=`jq -r ".NodeInfo.moniker" <<< $status`
 node_info=`$daemon query staking validators --node "$node_tcp" --limit 5000 --output json | jq -r '.validators[] | select(.description.moniker=='\"$moniker\"')'`
